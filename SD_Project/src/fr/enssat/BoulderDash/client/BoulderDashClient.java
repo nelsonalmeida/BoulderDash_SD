@@ -54,7 +54,7 @@ public class BoulderDashClient extends javax.swing.JFrame {
 
         jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/fr/enssat/BoulderDash/images/arcade-font-writer (18).png"))); // NOI18N
 
-        ServiceHostname.setText("192.168.0.100");
+        ServiceHostname.setText("192.168.1.243");
 
         jLabel4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/fr/enssat/BoulderDash/images/arcade-font-writer (19).png"))); // NOI18N
 

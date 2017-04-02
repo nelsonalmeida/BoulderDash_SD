@@ -1,5 +1,6 @@
 package fr.enssat.BoulderDash.server;
 
+import fr.enssat.BoulderDash.Game;
 import java.rmi.Remote;
 import java.rmi.RemoteException;
 
@@ -13,5 +14,6 @@ import java.rmi.RemoteException;
  */
 public interface BoulderDashSessionRI extends Remote {
     //public void startGame() throws RemoteException;
+    public void newGame(GameW g) throws RemoteException;
     public void logout() throws RemoteException;
 }

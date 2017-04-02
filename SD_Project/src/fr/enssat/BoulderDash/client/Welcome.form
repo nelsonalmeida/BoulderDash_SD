@@ -26,7 +26,7 @@
   <Layout>
     <DimensionLayout dim="0">
       <Group type="103" groupAlignment="0" attributes="0">
-          <Component id="jPanel1" pref="728" max="32767" attributes="0"/>
+          <Component id="jPanel1" max="32767" attributes="0"/>
       </Group>
     </DimensionLayout>
     <DimensionLayout dim="1">
@@ -57,7 +57,7 @@
                                   <Component id="jLabelNewGame" min="-2" max="-2" attributes="0"/>
                               </Group>
                           </Group>
-                          <EmptySpace max="32767" attributes="0"/>
+                          <EmptySpace pref="25" max="32767" attributes="0"/>
                           <Group type="103" groupAlignment="0" attributes="0">
                               <Group type="102" alignment="1" attributes="0">
                                   <Group type="103" groupAlignment="1" attributes="0">
@@ -76,9 +76,7 @@
                           <Component id="jLabelWelcome" min="-2" pref="247" max="-2" attributes="0"/>
                           <EmptySpace max="32767" attributes="0"/>
                           <Component id="jLabel1" min="-2" max="-2" attributes="0"/>
-                          <EmptySpace max="-2" attributes="0"/>
-                          <Component id="jTextFieldLogged" min="-2" pref="92" max="-2" attributes="0"/>
-                          <EmptySpace min="-2" pref="45" max="-2" attributes="0"/>
+                          <EmptySpace min="-2" pref="141" max="-2" attributes="0"/>
                       </Group>
                   </Group>
               </Group>
@@ -96,13 +94,10 @@
                           <EmptySpace max="-2" attributes="0"/>
                           <Component id="jButtonLogout" min="-2" max="-2" attributes="0"/>
                           <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                          <Group type="103" groupAlignment="3" attributes="0">
-                              <Component id="jLabel1" alignment="3" min="-2" max="-2" attributes="0"/>
-                              <Component id="jTextFieldLogged" alignment="3" min="-2" max="-2" attributes="0"/>
-                          </Group>
+                          <Component id="jLabel1" min="-2" max="-2" attributes="0"/>
                       </Group>
                   </Group>
-                  <EmptySpace min="-2" pref="39" max="-2" attributes="0"/>
+                  <EmptySpace min="-2" pref="42" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="1" attributes="0">
                       <Component id="jLabelNewGame" min="-2" max="-2" attributes="0"/>
                       <Component id="jLabelAvaibleGames" min="-2" max="-2" attributes="0"/>
@@ -168,17 +163,32 @@
           <Layout>
             <DimensionLayout dim="0">
               <Group type="103" groupAlignment="0" attributes="0">
-                  <Group type="102" alignment="0" attributes="0">
-                      <EmptySpace min="-2" pref="78" max="-2" attributes="0"/>
-                      <Component id="jLabelGameName" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace max="32767" attributes="0"/>
+                  <Group type="102" attributes="0">
+                      <Group type="103" groupAlignment="0" attributes="0">
+                          <Group type="102" alignment="1" attributes="0">
+                              <EmptySpace max="-2" attributes="0"/>
+                              <Component id="jButtonCreate" max="32767" attributes="0"/>
+                          </Group>
+                          <Group type="102" attributes="0">
+                              <Group type="103" groupAlignment="0" attributes="0">
+                                  <Group type="102" alignment="0" attributes="0">
+                                      <EmptySpace min="-2" pref="78" max="-2" attributes="0"/>
+                                      <Component id="jLabelGameName" min="-2" max="-2" attributes="0"/>
+                                  </Group>
+                                  <Group type="102" alignment="0" attributes="0">
+                                      <EmptySpace max="-2" attributes="0"/>
+                                      <Component id="jTextFieldGameName" min="-2" pref="192" max="-2" attributes="0"/>
+                                  </Group>
+                              </Group>
+                              <EmptySpace min="0" pref="2" max="32767" attributes="0"/>
+                          </Group>
+                          <Group type="102" alignment="1" attributes="0">
+                              <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
+                              <Component id="jTextFieldLevel" min="-2" pref="192" max="-2" attributes="0"/>
+                          </Group>
+                      </Group>
+                      <EmptySpace max="-2" attributes="0"/>
                   </Group>
-                  <Group type="102" alignment="1" attributes="0">
-                      <EmptySpace pref="22" max="32767" attributes="0"/>
-                      <Component id="jTextFieldGameName" min="-2" pref="192" max="-2" attributes="0"/>
-                      <EmptySpace pref="29" max="32767" attributes="0"/>
-                  </Group>
-                  <Component id="jButtonCreate" alignment="0" max="32767" attributes="0"/>
               </Group>
             </DimensionLayout>
             <DimensionLayout dim="1">
@@ -186,11 +196,13 @@
                   <Group type="102" alignment="0" attributes="0">
                       <EmptySpace min="-2" pref="18" max="-2" attributes="0"/>
                       <Component id="jLabelGameName" min="-2" pref="20" max="-2" attributes="0"/>
-                      <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                      <EmptySpace max="-2" attributes="0"/>
                       <Component id="jTextFieldGameName" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace min="-2" pref="18" max="-2" attributes="0"/>
+                      <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                      <Component id="jTextFieldLevel" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace min="-2" pref="11" max="-2" attributes="0"/>
                       <Component id="jButtonCreate" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace max="32767" attributes="0"/>
+                      <EmptySpace pref="25" max="32767" attributes="0"/>
                   </Group>
               </Group>
             </DimensionLayout>
@@ -220,6 +232,11 @@
               <Events>
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButtonCreateActionPerformed"/>
               </Events>
+            </Component>
+            <Component class="javax.swing.JTextField" name="jTextFieldLevel">
+              <Properties>
+                <Property name="text" type="java.lang.String" value="Level"/>
+              </Properties>
             </Component>
           </SubComponents>
         </Container>
@@ -354,11 +371,6 @@
             </Property>
             <Property name="text" type="java.lang.String" value="Logged in: "/>
           </Properties>
-        </Component>
-        <Component class="javax.swing.JTextField" name="jTextFieldLogged">
-          <Events>
-            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jTextFieldLoggedActionPerformed"/>
-          </Events>
         </Component>
       </SubComponents>
     </Container>

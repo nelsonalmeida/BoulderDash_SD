@@ -68,7 +68,6 @@ public class NavigationBetweenViewController implements ActionListener {
 
                 this.levelModelForGame = new LevelModel(pickedLevelIdentifier, audioLoadHelper);
                 this.gameController = new GameController(levelModelForGame, audioLoadHelper, this);
-
                 if (levelEditorController != null) {
                     this.levelEditorController.getLevelEditorView().setVisible(false);
                 }

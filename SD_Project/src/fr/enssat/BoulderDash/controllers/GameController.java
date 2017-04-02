@@ -28,12 +28,13 @@ public class GameController implements ActionListener {
 	private NavigationBetweenViewController navigationBetweenViewController;
 	
     /**
-     * Class constructor
+     * Class constructor    
      *
      * @param  levelModel  Level model
      * @param navigationBetweenViewController 
      */
 	public GameController(LevelModel levelModel, AudioLoadHelper audioLoadHelper, NavigationBetweenViewController navigationBetweenViewController) {
+
         this.firstClickOnPause = true;
         
         this.navigationBetweenViewController = navigationBetweenViewController;

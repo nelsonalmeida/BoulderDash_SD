@@ -57,7 +57,7 @@ public class Login extends javax.swing.JFrame {
 
         jLabelUsername.setIcon(new javax.swing.ImageIcon(getClass().getResource("/fr/enssat/BoulderDash/images/arcade-font-writer (5).png"))); // NOI18N
 
-        jTextFieldUsername.setText("username");
+        jTextFieldUsername.setText("daniel");
         jTextFieldUsername.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jTextFieldUsernameActionPerformed(evt);
@@ -66,7 +66,7 @@ public class Login extends javax.swing.JFrame {
 
         jLabelPassword.setIcon(new javax.swing.ImageIcon(getClass().getResource("/fr/enssat/BoulderDash/images/arcade-font-writer (4).png"))); // NOI18N
 
-        jTextFieldPassword.setText("12345");
+        jTextFieldPassword.setText("mendes");
 
         jButtonLogin.setIcon(new javax.swing.ImageIcon(getClass().getResource("/fr/enssat/BoulderDash/images/arcade-font-writer (6).png"))); // NOI18N
         jButtonLogin.addActionListener(new java.awt.event.ActionListener() {
@@ -168,9 +168,20 @@ public class Login extends javax.swing.JFrame {
                     System.exit(0);
                 }else{
                     
-                    Welcome welcomeForm = new Welcome();
+                    Welcome welcomeForm = new Welcome(username,dlsRI);
+                    welcomeForm.conexao = this.conexao;
                     welcomeForm.setVisible(true);
+                    
                     this.setVisible(false);
+                    
+                    /*
+                     Lobby formLobby = new Lobby(username,session);
+                    formLobby.connection = this.connection;
+                    formLobby.setVisible(true);
+                    formLobby.formLogin = this;
+                    this.setVisible(false);
+                    */
+                    
                 }
             } catch (RemoteException ex) {
                 Logger.getLogger(Login.class.getName()).log(Level.SEVERE, null, ex);
@@ -202,9 +213,12 @@ public class Login extends javax.swing.JFrame {
                         System.out.println("BoulderDashClient - Constructor(): dlsRI is null!!!");
                         System.exit(0);
                     }else{
-                        Welcome welcomeForm = new Welcome();
+                        Welcome welcomeForm = new Welcome(username,dlsRI2);
+                        welcomeForm.conexao = this.conexao;
                         welcomeForm.setVisible(true);
+                        //formLobby.formLogin = this;
                         this.setVisible(false);
+                        
                     } 
                 }
             } catch (RemoteException ex) {

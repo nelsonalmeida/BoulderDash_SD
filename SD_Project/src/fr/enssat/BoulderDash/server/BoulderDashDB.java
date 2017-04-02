@@ -1,11 +1,13 @@
 package fr.enssat.BoulderDash.server;
 
+import fr.enssat.BoulderDash.Game;
+import java.util.ArrayList;
 import java.util.Vector;
 
 public class BoulderDashDB {
     
     private Vector<User> users = new Vector();
-    //private Vector<Game> games = new Vector();
+    private Vector<GameW> games = new Vector();
 
     
     
@@ -49,12 +51,21 @@ public class BoulderDashDB {
     }
     
     
-    /**
-     * Start Game
+   
+     /* Start Game */
      
-    public void insertGame(Game g) {
+    public void insertGame(GameW g) {
         games.add(g);
     }
-    * */
+    
+    public Vector<GameW> selectGames() {
+        Vector<GameW> agames = new Vector();
+        for (int i = 0; i < games.size(); i++) {
+                
+                agames.add(games.get(i));
+        }
+        return agames;
+    }
+    
     
 }

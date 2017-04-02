@@ -24,6 +24,7 @@ public class BoulderAndDiamondController implements Runnable {
 	 * Class constructor
 	 *
 	 * @param levelModel  Level model
+     * @param audioLoadHelper
 	 */
 	public BoulderAndDiamondController(LevelModel levelModel, AudioLoadHelper audioLoadHelper) {
 		this.levelModel = levelModel;
@@ -37,6 +38,7 @@ public class BoulderAndDiamondController implements Runnable {
 	/**
 	 * Watches for elements to be moved
 	 */
+        @Override
 	public void run() {
 		while (this.levelModel.isGameRunning()) {
 			if(!this.levelModel.getGamePaused()){

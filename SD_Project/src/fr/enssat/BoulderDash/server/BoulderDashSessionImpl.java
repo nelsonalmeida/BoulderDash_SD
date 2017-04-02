@@ -1,5 +1,6 @@
 package fr.enssat.BoulderDash.server;
 
+import fr.enssat.BoulderDash.Game;
 import java.rmi.server.UnicastRemoteObject;
 import java.rmi.RemoteException;
 import java.util.ArrayList;
@@ -15,7 +16,7 @@ import java.util.logging.Logger;
  * @version 1.0
  */
 public class BoulderDashSessionImpl implements BoulderDashSessionRI, Runnable {
-
+    private BoulderDashDB db;
     private BoulderDashFactoryImpl factory;
     private boolean keeprunning = true;
     
@@ -35,11 +36,17 @@ public class BoulderDashSessionImpl implements BoulderDashSessionRI, Runnable {
 */
     @Override
     public void logout() throws RemoteException {
+        
         System.out.println("BoulderDashSessionImpl - logout(): ");
         this.keeprunning = false;
         this.factory.sessions.remove(this);
+        
+        
     }
-
+    
+    public void newGame(GameW g) throws RemoteException{
+        this.db.insertGame(g);
+    }
 
     @Override
     public void run() {
@@ -53,4 +60,5 @@ public class BoulderDashSessionImpl implements BoulderDashSessionRI, Runnable {
             }
         }
     }
+
 }
