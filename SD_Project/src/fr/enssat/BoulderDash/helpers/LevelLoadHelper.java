@@ -66,6 +66,11 @@ public class LevelLoadHelper {
     private RockfordModel rockfordInstance;
     private int rockfordPositionX = 0;
     private int rockfordPositionY = 0;
+    
+    private RockfordModel rockfordInstanceSecondPlayer;
+    private int rockfordSecondPlayerPositionX = 0;
+    private int rockfordSecondPlayerPositionY = 0;
+
 
     private int diamondsToCatch;
 
@@ -271,6 +276,11 @@ public class LevelLoadHelper {
                 this.setRockfordPositionY(lineIndex);
                 this.setRockfordInstance((RockfordModel) element);
                 break;
+            case "rockfordSecondPlayer":
+                this.setRockfordSecondPlayerPositionX(rowIndex);
+                this.setRockfordSecondPlayerPositionY(lineIndex);
+                this.setRockfordInstanceSecondPlayer((RockfordModel) element);
+                break;
         }
 
         return element;
@@ -392,6 +402,9 @@ public class LevelLoadHelper {
     public int getRockfordPositionX() {
         return this.rockfordPositionX;
     }
+    public int getRockfordSecondPlayerPositionX() {
+        return this.rockfordSecondPlayerPositionX;
+    }
 
     /**
      * Sets the horizontal position of the Rockford element
@@ -400,6 +413,9 @@ public class LevelLoadHelper {
      */
     public void setRockfordPositionX(int x) {
         this.rockfordPositionX = x;
+    }
+    public void setRockfordSecondPlayerPositionX(int x) {
+        this.rockfordSecondPlayerPositionX = x;
     }
 
     /**
@@ -410,6 +426,9 @@ public class LevelLoadHelper {
     public int getRockfordPositionY() {
         return this.rockfordPositionY;
     }
+    public int getRockfordSecondPlayerPositionY() {
+        return this.rockfordSecondPlayerPositionY;
+    }
 
     /**
      * Sets the vertical position of the Rockford element
@@ -418,6 +437,9 @@ public class LevelLoadHelper {
      */
     public void setRockfordPositionY(int y) {
         this.rockfordPositionY = y;
+    }
+    public void setRockfordSecondPlayerPositionY(int y) {
+        this.rockfordSecondPlayerPositionY = y;
     }
 
     /**
@@ -428,6 +450,9 @@ public class LevelLoadHelper {
     public RockfordModel getRockfordInstance() {
         return this.rockfordInstance;
     }
+    public RockfordModel getRockfordInstanceSecondPlayer() {
+        return this.rockfordInstanceSecondPlayer;
+    }
 
     /**
      * Sets the instance of Rockford
@@ -436,6 +461,9 @@ public class LevelLoadHelper {
      */
     public void setRockfordInstance(RockfordModel rockfordInstance) {
         this.rockfordInstance = rockfordInstance;
+    }
+    public void setRockfordInstanceSecondPlayer(RockfordModel rockfordInstanceSecondPlayer) {
+        this.rockfordInstanceSecondPlayer = rockfordInstanceSecondPlayer;
     }
 
     /**

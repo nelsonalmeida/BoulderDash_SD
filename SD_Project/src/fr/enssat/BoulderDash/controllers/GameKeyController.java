@@ -37,6 +37,7 @@ public class GameKeyController implements KeyListener {
      *
      * @param  e  Key event
      */
+        @Override
 	public void keyPressed(KeyEvent e) {
         int keyCode = e.getKeyCode();
 
@@ -81,6 +82,49 @@ public class GameKeyController implements KeyListener {
                 if (rightElement.getPriority() < levelModel.getRockford().getPriority()) {
                     this.updatePosRockford.moveRockford(levelModel.getRockfordPositionX() + 1, levelModel.getRockfordPositionY());
                     this.levelModel.getRockford().startRunningRight();
+                }
+
+                break;
+                
+            case KeyEvent.VK_W:
+                DisplayableElementModel upElementSecondPlayer = levelModel.getGroundLevelModel()[levelModel.getRockfordSecondPlayerPositionX()][levelModel.getRockfordSecondPlayerPositionY() - 1];
+
+                if (upElementSecondPlayer.getPriority() < levelModel.getRockford().getPriority()) {
+                    this.updatePosRockford.moveRockford(levelModel.getRockfordSecondPlayerPositionX(), levelModel.getRockfordSecondPlayerPositionY() - 1);
+                    this.levelModel.getRockfordSecondPlayer().startRunningUp();
+                }
+
+                break;
+
+            // Direction: DOWN
+            case KeyEvent.VK_S:
+                DisplayableElementModel downElementSecondPlayer = levelModel.getGroundLevelModel()[levelModel.getRockfordSecondPlayerPositionX()][levelModel.getRockfordSecondPlayerPositionY() + 1];
+
+                if (downElementSecondPlayer.getPriority() < levelModel.getRockford().getPriority()) {
+                    this.updatePosRockford.moveRockford(levelModel.getRockfordSecondPlayerPositionX(), levelModel.getRockfordSecondPlayerPositionY() + 1);
+                    this.levelModel.getRockfordSecondPlayer().startRunningDown();
+                }
+
+                break;
+
+            // Direction: LEFT
+            case KeyEvent.VK_A:
+                DisplayableElementModel leftElementSecondPlayer = levelModel.getGroundLevelModel()[levelModel.getRockfordSecondPlayerPositionX() - 1][levelModel.getRockfordSecondPlayerPositionY()];
+
+                if (leftElementSecondPlayer.getPriority() < levelModel.getRockford().getPriority()) {
+                    this.updatePosRockford.moveRockford(levelModel.getRockfordSecondPlayerPositionX() - 1, levelModel.getRockfordSecondPlayerPositionY());
+                    this.levelModel.getRockfordSecondPlayer().startRunningLeft();
+                }
+
+                break;
+
+            // Direction: RIGHT
+            case KeyEvent.VK_D:
+                DisplayableElementModel rightElementSecondPlayer = levelModel.getGroundLevelModel()[levelModel.getRockfordSecondPlayerPositionX() + 1][levelModel.getRockfordSecondPlayerPositionY()];
+
+                if (rightElementSecondPlayer.getPriority() < levelModel.getRockford().getPriority()) {
+                    this.updatePosRockford.moveRockford(levelModel.getRockfordSecondPlayerPositionX() + 1, levelModel.getRockfordSecondPlayerPositionY());
+                    this.levelModel.getRockfordSecondPlayer().startRunningRight();
                 }
 
                 break;

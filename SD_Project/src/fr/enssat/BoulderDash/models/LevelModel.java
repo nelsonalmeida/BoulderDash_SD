@@ -31,6 +31,13 @@ import java.util.Observable;
  * @since 2015-06-19
  */
 public class LevelModel extends Observable implements Runnable {
+
+    /**
+     * @param rockfordSecondPlayer the rockfordSecondPlayer to set
+     */
+    public void setRockfordSecondPlayer(RockfordModel rockfordSecondPlayer) {
+        this.rockfordSecondPlayer = rockfordSecondPlayer;
+    }
 	private DisplayableElementModel[][] groundGrid;
 	private String levelName;
 	private AudioLoadHelper audioLoadHelper;
@@ -42,8 +49,10 @@ public class LevelModel extends Observable implements Runnable {
 	private CursorModel cursorModel;
 	private LevelLoadHelper levelLoadHelper;
 	private RockfordModel rockford;
+        private RockfordModel rockfordSecondPlayer;
 	private GameInformationModel gameInformationModel;
 	private int rockfordPositionX, rockfordPositionY;
+        private int rockfordSecondPlayerPositionX, rockfordSecondPlayerPositionY;
 	private boolean gameRunning;
 	private boolean gamePaused;
 	// Are we in editor or game mode ?
@@ -86,6 +95,7 @@ public class LevelModel extends Observable implements Runnable {
 
         if(this.mode.equals("game")) {
             this.initRockford();
+            this.initRockfordSecondPlayer();
             this.initThreadAnimator();
         }
 	}
@@ -140,6 +150,12 @@ public class LevelModel extends Observable implements Runnable {
 		this.rockfordPositionX = this.levelLoadHelper.getRockfordPositionX();
 		this.rockfordPositionY = this.levelLoadHelper.getRockfordPositionY();
 		this.rockford = this.levelLoadHelper.getRockfordInstance();
+	}
+        
+        private void initRockfordSecondPlayer() {
+		this.rockfordSecondPlayerPositionX = this.levelLoadHelper.getRockfordPositionX();
+		this.rockfordSecondPlayerPositionY = this.levelLoadHelper.getRockfordPositionY();
+                this.rockfordSecondPlayer = this.levelLoadHelper.getRockfordInstanceSecondPlayer();
 	}
 
 	/**
@@ -220,6 +236,9 @@ public class LevelModel extends Observable implements Runnable {
 	 */
 	public int getRockfordPositionX() {
 		return this.rockfordPositionX;
+	}
+        public int getRockfordSecondPlayerPositionX() {
+		return this.rockfordSecondPlayerPositionX;
 	}
 
 	/**
@@ -312,6 +331,9 @@ public class LevelModel extends Observable implements Runnable {
 	public int getRockfordPositionY() {
 		return this.rockfordPositionY;
 	}
+        public int getRockfordSecondPlayerPositionY() {
+		return this.rockfordSecondPlayerPositionY;
+	}
 
 	/**
 	 * Gets the Rockford object instance
@@ -320,6 +342,9 @@ public class LevelModel extends Observable implements Runnable {
 	 */
 	public RockfordModel getRockford() {
 		return this.rockford;
+	}
+        public RockfordModel getRockfordSecondPlayer(){
+		return this.rockfordSecondPlayer;
 	}
 
 	/**

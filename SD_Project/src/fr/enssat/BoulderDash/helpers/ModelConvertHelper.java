@@ -73,6 +73,8 @@ public class ModelConvertHelper {
 
             case "rockford":
             case "Rockford":
+            case "rockfordSecondPlayer":
+            case "RockfordSecondPlayer":
                 element = new RockfordModel();
                 break;
 

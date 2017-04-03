@@ -71,6 +71,8 @@ public class RockfordModel extends DisplayableElementModel {
 		falling = false;
 		collideSound = null;
 	}
+        
+        
 
     /**
      * Class constructor
