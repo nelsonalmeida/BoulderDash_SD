@@ -13,16 +13,16 @@ import fr.enssat.BoulderDash.models.DirtModel;
 import fr.enssat.BoulderDash.models.MagicWallModel;
 import fr.enssat.BoulderDash.models.SteelWallModel;
 
-
 /**
  * ModelConvertHelper
  *
  * Provides model conversion services.
  *
- * @author      Valerian Saliou <valerian@valeriansaliou.name>
- * @since       2015-06-22
+ * @author Valerian Saliou <valerian@valeriansaliou.name>
+ * @since 2015-06-22
  */
 public class ModelConvertHelper {
+
     /**
      * Class constructor
      */
@@ -33,8 +33,8 @@ public class ModelConvertHelper {
     /**
      * Gets the model associated to the string
      *
-     * @param   spriteName  Sprite name
-     * @return  Model associated to given sprite name
+     * @param spriteName Sprite name
+     * @return Model associated to given sprite name
      */
     public DisplayableElementModel toModel(String spriteName, boolean isConvertible) throws UnknownModelException {
         DisplayableElementModel element;
@@ -71,13 +71,6 @@ public class ModelConvertHelper {
                 element = new MagicWallModel();
                 break;
 
-            case "rockford":
-            case "Rockford":
-            case "rockfordSecondPlayer":
-            case "RockfordSecondPlayer":
-                element = new RockfordModel();
-                break;
-
             case "steelwall":
             case "Steel Wall":
                 element = new SteelWallModel();
@@ -86,6 +79,13 @@ public class ModelConvertHelper {
             case "expandingwall":
             case "Expanding Wall":
                 element = new ExpandingWallModel();
+                break;
+
+            case "rockford0":
+            case "Rockford0":
+            case "rockford1":
+            case "Rockford1":
+                element = new RockfordModel(spriteName);
                 break;
 
             default:
@@ -98,7 +98,7 @@ public class ModelConvertHelper {
     /**
      * Gets the string associated to the model
      *
-     * @return  Model string name
+     * @return Model string name
      */
     public String toString(DisplayableElementModel model) {
         return model.getSpriteName();
