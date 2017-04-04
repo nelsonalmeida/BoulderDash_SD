@@ -280,7 +280,7 @@ public class LevelModel extends Observable implements Runnable {
         }
 
         // Cancel if Rockford is already in model
-        if ((blockValue.equals("Rockford0") || blockValue.equals("rockford0")) && this.isRockfordInModel()) {
+        if ((blockValue.equals("Rockford0") || blockValue.equals("rockford0") || blockValue.equals("Rockford1") || blockValue.equals("rockford1")) && this.isRockfordInModel()) {
             return;
         }
 
@@ -377,7 +377,7 @@ public class LevelModel extends Observable implements Runnable {
         // Iterate and catch it!
         for (int x = 0; x < this.getSizeWidth() && !isInModel; x++) {
             for (int y = 0; y < this.getSizeHeight() && !isInModel; y++) {
-                if (this.groundGrid[x][y] != null && this.groundGrid[x][y].getSpriteName() == "rockford0") {
+                if (this.groundGrid[x][y] != null && (this.groundGrid[x][y].getSpriteName() == "rockford0" || this.groundGrid[x][y].getSpriteName() == "rockford1")) {
                     isInModel = true;
                 }
             }

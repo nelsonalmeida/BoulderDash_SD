@@ -87,51 +87,50 @@ public class GameKeyController implements KeyListener {
                 }
 
                 break;
-
-                /*
+            // Direction: UP
             case KeyEvent.VK_W:
-                DisplayableElementModel upElementSecondPlayer = levelModel.getGroundLevelModel()[levelModel.getRockfordSecondPlayerPositionX()][levelModel.getRockfordSecondPlayerPositionY() - 1];
+                DisplayableElementModel upElement1 = levelModel.getGroundLevelModel()[levelModel.getRockfordPositionX(1)][levelModel.getRockfordPositionY(1) - 1];
 
-                if (upElementSecondPlayer.getPriority() < levelModel.getRockford().getPriority()) {
-                    this.updatePosRockford.moveRockford(levelModel.getRockfordSecondPlayerPositionX(), levelModel.getRockfordSecondPlayerPositionY() - 1);
-                    this.levelModel.getRockfordSecondPlayer().startRunningUp();
+                if (upElement1.getPriority() < levelModel.getRockford(1).getPriority()) {
+                    this.updatePosRockford[1].moveRockford(levelModel.getRockfordPositionX(1), levelModel.getRockfordPositionY(1) - 1);
+                    this.levelModel.getRockford(1).startRunningUp();
                 }
 
                 break;
 
             // Direction: DOWN
             case KeyEvent.VK_S:
-                DisplayableElementModel downElementSecondPlayer = levelModel.getGroundLevelModel()[levelModel.getRockfordSecondPlayerPositionX()][levelModel.getRockfordSecondPlayerPositionY() + 1];
+                DisplayableElementModel downElement1 = levelModel.getGroundLevelModel()[levelModel.getRockfordPositionX(1)][levelModel.getRockfordPositionY(1) + 1];
 
-                if (downElementSecondPlayer.getPriority() < levelModel.getRockford().getPriority()) {
-                    this.updatePosRockford.moveRockford(levelModel.getRockfordSecondPlayerPositionX(), levelModel.getRockfordSecondPlayerPositionY() + 1);
-                    this.levelModel.getRockfordSecondPlayer().startRunningDown();
+                if (downElement1.getPriority() < levelModel.getRockford(1).getPriority()) {
+                    this.updatePosRockford[1].moveRockford(levelModel.getRockfordPositionX(1), levelModel.getRockfordPositionY(1) + 1);
+                    this.levelModel.getRockford(1).startRunningDown();
                 }
 
                 break;
 
             // Direction: LEFT
             case KeyEvent.VK_A:
-                DisplayableElementModel leftElementSecondPlayer = levelModel.getGroundLevelModel()[levelModel.getRockfordSecondPlayerPositionX() - 1][levelModel.getRockfordSecondPlayerPositionY()];
+                DisplayableElementModel leftElement1 = levelModel.getGroundLevelModel()[levelModel.getRockfordPositionX(1) - 1][levelModel.getRockfordPositionY(1)];
 
-                if (leftElementSecondPlayer.getPriority() < levelModel.getRockford().getPriority()) {
-                    this.updatePosRockford.moveRockford(levelModel.getRockfordSecondPlayerPositionX() - 1, levelModel.getRockfordSecondPlayerPositionY());
-                    this.levelModel.getRockfordSecondPlayer().startRunningLeft();
+                if (leftElement1.getPriority() < levelModel.getRockford(1).getPriority()) {
+                    this.updatePosRockford[1].moveRockford(levelModel.getRockfordPositionX(1) - 1, levelModel.getRockfordPositionY(1));
+                    this.levelModel.getRockford(1).startRunningLeft();
                 }
 
                 break;
 
             // Direction: RIGHT
             case KeyEvent.VK_D:
-                DisplayableElementModel rightElementSecondPlayer = levelModel.getGroundLevelModel()[levelModel.getRockfordSecondPlayerPositionX() + 1][levelModel.getRockfordSecondPlayerPositionY()];
+                DisplayableElementModel rightElement1 = levelModel.getGroundLevelModel()[levelModel.getRockfordPositionX(1) + 1][levelModel.getRockfordPositionY(1)];
 
-                if (rightElementSecondPlayer.getPriority() < levelModel.getRockford().getPriority()) {
-                    this.updatePosRockford.moveRockford(levelModel.getRockfordSecondPlayerPositionX() + 1, levelModel.getRockfordSecondPlayerPositionY());
-                    this.levelModel.getRockfordSecondPlayer().startRunningRight();
+                if (rightElement1.getPriority() < levelModel.getRockford(1).getPriority()) {
+                    this.updatePosRockford[1].moveRockford(levelModel.getRockfordPositionX(1) + 1, levelModel.getRockfordPositionY(1));
+                    this.levelModel.getRockford(1).startRunningRight();
                 }
 
                 break;
-            */
+                
         }
         
     }
