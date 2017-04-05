@@ -51,13 +51,13 @@ public abstract class GroundView extends JPanel implements Observer {
 			}
 
 			if(!this.levelModel.isGameRunning()) {
-                            for(int i=0;i<2;i++){
-				if(!this.levelModel.getRockford(i).getHasExplosed()) {
+                            //for(int i=0;i<2;i++){
+				if(!this.levelModel.getRockford(0).getHasExplosed()) {
 					this.displayWin();
 				} else {
 					this.displayLose();
 				}
-                            }
+                            //}
 			}
 		} else {
 			for (int x = 0; x < width; x++) {

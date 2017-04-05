@@ -1,5 +1,6 @@
 package fr.enssat.BoulderDash.server;
 
+import fr.enssat.BoulderDash.Game;
 import java.io.Serializable;
 import java.rmi.RemoteException;
 
@@ -10,9 +11,11 @@ import java.rmi.RemoteException;
  */
 public class GameW implements Serializable {
     private String name;
+    private Game game;
 
     public GameW(String name) throws RemoteException {
         this.name = name;
+        this.game = game;
     }
     
     /**

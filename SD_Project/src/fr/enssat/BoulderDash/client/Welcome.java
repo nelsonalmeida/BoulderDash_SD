@@ -279,22 +279,6 @@ public class Welcome extends javax.swing.JFrame {
                 new NavigationBetweenViewController();
             }
         });
-       /*     
-        try {
-            GameW g = new GameW(name);
-            db.insertGame(g);
-          
-            
-             SwingUtilities.invokeLater(new Runnable() {
-            @Override
-            public void run() {
-                new NavigationBetweenViewController();
-            }
-        });
-             
-        } catch (RemoteException ex) {
-            Logger.getLogger(Welcome.class.getName()).log(Level.SEVERE, null, ex);
-        }*/
            
     }//GEN-LAST:event_jButtonCreateActionPerformed
 
