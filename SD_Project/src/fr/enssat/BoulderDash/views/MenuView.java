@@ -9,30 +9,30 @@ import fr.enssat.BoulderDash.views.MenuImage;
 import fr.enssat.BoulderDash.views.MenuLevelSelector;
 import fr.enssat.BoulderDash.controllers.NavigationBetweenViewController;
 
-
 /**
  * MenuView
  *
  * Menu view
  *
- * @author      Valerian Saliou <valerian@valeriansaliou.name>
- * @since       2015-06-23
+ * @author Valerian Saliou <valerian@valeriansaliou.name>
+ * @since 2015-06-23
  */
 public class MenuView extends JFrame {
-	private NavigationBetweenViewController navigationBetweenViewController;
+
+    private NavigationBetweenViewController navigationBetweenViewController;
     private MenuImage menuImage;
     private MenuLevelSelector menuLevelSelector;
-	private JPanel actionPanel;
+    private JPanel actionPanel;
     private JPanel targetPanel;
 
     /**
      * Class constructor
      */
-	public MenuView(NavigationBetweenViewController navigationBetweenViewController) {
-		this.navigationBetweenViewController = navigationBetweenViewController;
-		this.initializeView();
-		this.createLayout();
-	}
+    public MenuView(NavigationBetweenViewController navigationBetweenViewController) {
+        this.navigationBetweenViewController = navigationBetweenViewController;
+        this.initializeView();
+        this.createLayout();
+    }
 
     /**
      * Initializes the view
@@ -60,8 +60,8 @@ public class MenuView extends JFrame {
         this.targetPanel = new JPanel();
 
         this.menuImage = new MenuImage();
-    	this.actionPanel = new JPanel();
-    	
+        this.actionPanel = new JPanel();
+
         // Add some buttons on the actionPanel
         this.createButton("game", "Game");
         this.createButton("editor", "Editor");
@@ -77,23 +77,23 @@ public class MenuView extends JFrame {
     /**
      * Creates the given button
      *
-     * @param   name  Button name
-     * @return  Created button
+     * @param name Button name
+     * @return Created button
      */
-	public JButton createButton(String id, String name) {
-		JButton button = new JButton(name);
-		button.addActionListener(this.navigationBetweenViewController);
+    public JButton createButton(String id, String name) {
+        JButton button = new JButton(name);
+        button.addActionListener(this.navigationBetweenViewController);
         button.setActionCommand(id);
 
-		this.actionPanel.add(button);
+        this.actionPanel.add(button);
 
-		return button;
-	}
+        return button;
+    }
 
     /**
      * Gets the selected level identifier!
      *
-     * @return  Level identifier
+     * @return Level identifier
      */
     public String getLevelIdentifier() {
         return this.menuLevelSelector.getChoiceValue();
