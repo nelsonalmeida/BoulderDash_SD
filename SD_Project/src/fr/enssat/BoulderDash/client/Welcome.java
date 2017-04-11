@@ -24,6 +24,7 @@ public class Welcome extends javax.swing.JFrame {
         
         initComponents();
         this.session=session;
+        this.jLabelPlayerName.setText(username);
         //updateLogged();
     }
     
@@ -59,6 +60,7 @@ public class Welcome extends javax.swing.JFrame {
         jButtonJoin = new javax.swing.JButton();
         jButtonRefresh = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
+        jLabelPlayerName = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setBackground(new java.awt.Color(0, 0, 0));
@@ -200,6 +202,9 @@ public class Welcome extends javax.swing.JFrame {
         jLabel1.setForeground(new java.awt.Color(255, 255, 255));
         jLabel1.setText("Logged in: ");
 
+        jLabelPlayerName.setForeground(new java.awt.Color(255, 255, 255));
+        jLabelPlayerName.setText("jLabel2");
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -227,7 +232,9 @@ public class Welcome extends javax.swing.JFrame {
                         .addComponent(jLabelWelcome, javax.swing.GroupLayout.PREFERRED_SIZE, 247, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(jLabel1)
-                        .addGap(141, 141, 141))))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jLabelPlayerName, javax.swing.GroupLayout.PREFERRED_SIZE, 109, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(26, 26, 26))))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -240,7 +247,9 @@ public class Welcome extends javax.swing.JFrame {
                         .addContainerGap()
                         .addComponent(jButtonLogout)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jLabel1)))
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel1)
+                            .addComponent(jLabelPlayerName))))
                 .addGap(42, 42, 42)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(jLabelNewGame)
@@ -362,6 +371,7 @@ public class Welcome extends javax.swing.JFrame {
     private javax.swing.JLabel jLabelAvaibleGames2;
     private javax.swing.JLabel jLabelGameName;
     private javax.swing.JLabel jLabelNewGame;
+    private javax.swing.JLabel jLabelPlayerName;
     private javax.swing.JLabel jLabelWelcome;
     private javax.swing.JList<String> jListAvaibleGames;
     private javax.swing.JPanel jPanel1;

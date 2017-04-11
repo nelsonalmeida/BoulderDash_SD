@@ -1,14 +1,12 @@
 package fr.enssat.BoulderDash.server;
 
 import fr.enssat.BoulderDash.Game;
+import fr.enssat.BoulderDash.controllers.NavigationBetweenViewController;
 import java.io.Serializable;
 import java.rmi.RemoteException;
+import javax.swing.SwingUtilities;
 
-/**
- *
- * @author Henrique
- * @author Joel
- */
+
 public class GameW implements Serializable {
     private String name;
     private Game game;
@@ -16,6 +14,15 @@ public class GameW implements Serializable {
     public GameW(String name) throws RemoteException {
         this.name = name;
         this.game = game;
+    }
+    
+    public void startGame(){
+        SwingUtilities.invokeLater(new Runnable() {
+            @Override
+            public void run() {
+                new NavigationBetweenViewController();
+            }
+        });
     }
     
     /**
