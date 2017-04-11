@@ -16,5 +16,4 @@ public interface BoulderDashSessionRI extends Remote {
     //public void startGame() throws RemoteException;
     public void newGame(GameW g) throws RemoteException;
     public void logout() throws RemoteException;
-    public  GameW[] viewGames() throws RemoteException;
 }

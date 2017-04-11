@@ -22,7 +22,6 @@ public class BoulderDashSessionImpl implements BoulderDashSessionRI, Runnable {
     
     public BoulderDashSessionImpl(BoulderDashFactoryImpl factory){
         this.factory = factory;
-        this.db = factory.db;
         System.out.println("BoulderDashSessionImpl - Constructor(): ...");
     }
 
@@ -45,16 +44,8 @@ public class BoulderDashSessionImpl implements BoulderDashSessionRI, Runnable {
         
     }
     
-
-    @Override
-    public  GameW[] viewGames() throws RemoteException{
-        return this.db.selectGames();
-    }
-    
-    @Override
     public void newGame(GameW g) throws RemoteException{
         this.db.insertGame(g);
-        
     }
 
     @Override

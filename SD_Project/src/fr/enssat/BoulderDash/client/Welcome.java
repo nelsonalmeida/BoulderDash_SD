@@ -12,7 +12,6 @@ import java.rmi.RemoteException;
 import java.util.Vector;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import javax.swing.DefaultListModel;
 import javax.swing.JTextField;
 import javax.swing.SwingUtilities;
 
@@ -23,30 +22,9 @@ public class Welcome extends javax.swing.JFrame {
     
     public Welcome(String username, BoulderDashSessionRI session) {
         
-        try {
-            initComponents();
-            this.session=session;
-            
-            //quem está em login
-            this.jLabelPlayerName.setText(username);
-            
-            //mostrar games
-            DefaultListModel dlm = new DefaultListModel();
-            jListAvaibleGames.setModel(dlm);
-            
-            GameW[] games;
-            games = this.session.viewGames();
-            
-            for(GameW game : games){
-                dlm.addElement(game);
-            }
-            
-        } catch (RemoteException ex) {
-            Logger.getLogger(Welcome.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        
-
-
+        initComponents();
+        this.session=session;
+        //updateLogged();
     }
     
     public void updateLogged() {
@@ -81,7 +59,6 @@ public class Welcome extends javax.swing.JFrame {
         jButtonJoin = new javax.swing.JButton();
         jButtonRefresh = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
-        jLabelPlayerName = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setBackground(new java.awt.Color(0, 0, 0));
@@ -162,6 +139,11 @@ public class Welcome extends javax.swing.JFrame {
         jPanelAvaibleGames.setBackground(new java.awt.Color(0, 0, 0));
         jPanelAvaibleGames.setBorder(new javax.swing.border.MatteBorder(new javax.swing.ImageIcon(getClass().getResource("/fr/enssat/BoulderDash/images/zxboulder1 - Copia.gif")))); // NOI18N
 
+        jListAvaibleGames.setModel(new javax.swing.AbstractListModel<String>() {
+            String[] strings = { "Item 1", "Item 2", "Item 3", "Item 4", "Item 5" };
+            public int getSize() { return strings.length; }
+            public String getElementAt(int i) { return strings[i]; }
+        });
         jScrollPane1.setViewportView(jListAvaibleGames);
 
         jLabelAvaibleGames2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/fr/enssat/BoulderDash/images/arcade-font-writer (16).png"))); // NOI18N
@@ -218,9 +200,6 @@ public class Welcome extends javax.swing.JFrame {
         jLabel1.setForeground(new java.awt.Color(255, 255, 255));
         jLabel1.setText("Logged in: ");
 
-        jLabelPlayerName.setForeground(new java.awt.Color(255, 255, 255));
-        jLabelPlayerName.setText("jLabel2");
-
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -248,9 +227,7 @@ public class Welcome extends javax.swing.JFrame {
                         .addComponent(jLabelWelcome, javax.swing.GroupLayout.PREFERRED_SIZE, 247, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(jLabel1)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jLabelPlayerName, javax.swing.GroupLayout.PREFERRED_SIZE, 109, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(26, 26, 26))))
+                        .addGap(141, 141, 141))))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -263,9 +240,7 @@ public class Welcome extends javax.swing.JFrame {
                         .addContainerGap()
                         .addComponent(jButtonLogout)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabel1)
-                            .addComponent(jLabelPlayerName))))
+                        .addComponent(jLabel1)))
                 .addGap(42, 42, 42)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(jLabelNewGame)
@@ -293,18 +268,33 @@ public class Welcome extends javax.swing.JFrame {
 
     private void jButtonCreateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonCreateActionPerformed
      
-             //this.setVisible(true);
-        String level = this.jTextFieldLevel.getText();
-        String name = this.jTextFieldGameName.getText();     
-       
+            
+            String level = this.jTextFieldLevel.getText();
+            String name = this.jTextFieldGameName.getText();
+            
+            
+            SwingUtilities.invokeLater(new Runnable() {
+            @Override
+            public void run() {
+                new NavigationBetweenViewController();
+            }
+        });
+       /*     
         try {
-            this.session.newGame(new GameW(name,1));
-
+            GameW g = new GameW(name);
+            db.insertGame(g);
+          
+            
+             SwingUtilities.invokeLater(new Runnable() {
+            @Override
+            public void run() {
+                new NavigationBetweenViewController();
+            }
+        });
+             
         } catch (RemoteException ex) {
             Logger.getLogger(Welcome.class.getName()).log(Level.SEVERE, null, ex);
-        }
-            
-
+        }*/
            
     }//GEN-LAST:event_jButtonCreateActionPerformed
 
@@ -333,20 +323,10 @@ public class Welcome extends javax.swing.JFrame {
 
     private void jButtonRefreshActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonRefreshActionPerformed
         
-        try {
-            
-            DefaultListModel dlm = new DefaultListModel();
-            jListAvaibleGames.setModel(dlm);
-            
-            GameW[] games;
-            games = this.session.viewGames();
-            
-            for(GameW game : games){
-                dlm.addElement(game);
-            }
-            
-        } catch (RemoteException ex) {
-            Logger.getLogger(Welcome.class.getName()).log(Level.SEVERE, null, ex);
+        Vector<GameW> tg = db.selectGames();
+        for(int i = 0; i< tg.size(); i++){
+            //this.jListAvaibleGames.add(tg.get(i).getName(), null);
+            this.jListAvaibleGames.setToolTipText(tg.get(i).getName());
         }
     }//GEN-LAST:event_jButtonRefreshActionPerformed
 
@@ -398,7 +378,6 @@ public class Welcome extends javax.swing.JFrame {
     private javax.swing.JLabel jLabelAvaibleGames2;
     private javax.swing.JLabel jLabelGameName;
     private javax.swing.JLabel jLabelNewGame;
-    private javax.swing.JLabel jLabelPlayerName;
     private javax.swing.JLabel jLabelWelcome;
     private javax.swing.JList<String> jListAvaibleGames;
     private javax.swing.JPanel jPanel1;

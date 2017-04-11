@@ -32,8 +32,6 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Locale;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 /**
  * LevelLoadHelper
@@ -65,15 +63,16 @@ public class LevelLoadHelper {
     private int limitsOffsetWidth = 1;
     private int limitsOffsetHeight = 1;
 
-    private RockfordModel rockfordInstance[] = {null, null};
-    private int rockfordPositionX[] = {0, 0};
-    private int rockfordPositionY[] = {0, 0};
-
+    private RockfordModel rockfordInstance[] = new RockfordModel[2];
+    private int rockfordPositionX[] = {0,0};
+    private int rockfordPositionY[] = {0,0};
+    
     /*
     private RockfordModel rockfordInstanceSecondPlayer;
     private int rockfordSecondPlayerPositionX = 0;
     private int rockfordSecondPlayerPositionY = 0;
-     */
+    */
+
     private int diamondsToCatch;
 
     private DisplayableElementModel[][] groundGrid;
@@ -230,9 +229,6 @@ public class LevelLoadHelper {
                                 String currentSpriteConvertibleValue = currentSpriteElement.getAttribute("convertible");
                                 boolean currentSpriteConvertible = false;
 
-                                if (currentSpriteName != null && currentSpriteName.contains("rockford")) {
-                                    Logger.getLogger(LevelLoadHelper.class.getName()).log(Level.INFO, "currentSpriteName=" + currentSpriteName);
-                                }
                                 // No name? Continue.
                                 if (currentSpriteName == null || currentSpriteName.isEmpty()) {
                                     continue;
@@ -267,17 +263,9 @@ public class LevelLoadHelper {
      * @param lineIndex Position in line (vertical axis)
      */
     private DisplayableElementModel constructGridElement(String spriteName, int rowIndex, int lineIndex, boolean convertible) throws UnknownModelException {
-        if (spriteName != null && spriteName.contains("rockford")) {
-            Logger.getLogger(LevelLoadHelper.class.getName()).log(Level.INFO, "spriteName=" + spriteName);
-        } else if (spriteName == null) {
-            Logger.getLogger(LevelLoadHelper.class.getName()).log(Level.INFO, "spriteName is null!");
-        }
         ModelConvertHelper modelConvert = new ModelConvertHelper();
         DisplayableElementModel element = modelConvert.toModel(spriteName, convertible);
 
-        if (element.getSpriteName() != null && element.getSpriteName().contains("rockford")) {
-            Logger.getLogger(LevelLoadHelper.class.getName()).log(Level.INFO, "element.getSpriteName()=" + element.getSpriteName());
-        }
         // Custom actions?
         switch (spriteName) {
             case "diamond":

@@ -18,8 +18,6 @@ import fr.enssat.BoulderDash.models.CursorModel;
 
 import java.awt.image.BufferedImage;
 import java.util.Observable;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 /**
  * LevelModel
@@ -75,7 +73,6 @@ public class LevelModel extends Observable implements Runnable {
         this.gameRunning = true;
         this.mode = mode;
 
-        Logger.getLogger(LevelModel.class.getName()).log(Level.INFO, "levelName="+levelName);
         this.levelLoadHelper = new LevelLoadHelper(this.levelName);
 
         this.groundGrid = this.levelLoadHelper.getGroundGrid();

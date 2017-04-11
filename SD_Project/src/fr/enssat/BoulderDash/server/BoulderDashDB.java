@@ -58,12 +58,11 @@ public class BoulderDashDB {
         games.add(g);
     }
     
-    public GameW[] selectGames() {
-        GameW[] agames = new GameW[games.size()];
+    public Vector<GameW> selectGames() {
+        Vector<GameW> agames = new Vector();
         for (int i = 0; i < games.size(); i++) {
-            if(games.elementAt(i).getNplayers()<2){
-                 agames[i] = games.elementAt(i);
-            }
+                
+                agames.add(games.get(i));
         }
         return agames;
     }

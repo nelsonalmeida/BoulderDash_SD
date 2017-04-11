@@ -4,8 +4,6 @@ import javax.imageio.ImageIO;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 /**
  * DisplayableElementModel
@@ -52,7 +50,6 @@ public abstract class DisplayableElementModel {
      * @param animate Object can be animated?
      */
     public DisplayableElementModel(boolean destructible, boolean moving, String spriteName, int priority, boolean impactExplosive, boolean animate, boolean falling, String collideSound, boolean convertible) {
-        //Logger.getLogger(DisplayableElementModel.class.getName()).log(Level.INFO, "spriteName = " + spriteName);
         this.moving = moving;
         this.destructible = destructible;
         this.spriteName = spriteName;
@@ -66,7 +63,9 @@ public abstract class DisplayableElementModel {
     }
 
     public DisplayableElementModel(boolean destructible, boolean moving, String spriteName, int priority, boolean impactExplosive, boolean animate, boolean falling, String collideSound) {
-        this(destructible, moving, spriteName, priority, impactExplosive, animate, falling, collideSound, false);
+        this(
+                destructible, moving, spriteName, priority, impactExplosive, animate, falling, collideSound, false
+        );
     }
 
     /**
@@ -214,16 +213,7 @@ public abstract class DisplayableElementModel {
         BufferedImage sprite = null;
 
         try {
-            if (spriteName != null && spriteName.contains("rockford")) {
-                Logger.getLogger(DisplayableElementModel.class.getName()).log(Level.INFO, "spriteName = " + spriteName);
-            } else if (spriteName == null) {
-                Logger.getLogger(DisplayableElementModel.class.getName()).log(Level.INFO, "spriteName is null!!");
-            }
-            String filename = spriteStorageFolderPath + spriteName + ".gif";
-            //Logger.getLogger(DisplayableElementModel.class.getName()).log(Level.INFO, "sprite filename = " + filename);
-
-            sprite = ImageIO.read(new File(filename));
-
+            sprite = ImageIO.read(new File(spriteStorageFolderPath + spriteName + ".gif"));
         } catch (IOException e) {
             e.printStackTrace();
         }

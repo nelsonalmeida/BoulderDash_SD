@@ -3,7 +3,12 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/Users/nelsonalmeida/NetBeansProjects/SD_Project/src/fr/enssat/BoulderDash/models/DisplayableElementModel.java</file>
+            <file>file:/Users/nelsonalmeida/NetBeansProjects/SD_Project/src/fr/enssat/BoulderDash/views/GroundView.java</file>
+            <file>file:/Users/nelsonalmeida/NetBeansProjects/SD_Project/src/fr/enssat/BoulderDash/helpers/LevelLoadHelper.java</file>
+            <file>file:/Users/nelsonalmeida/NetBeansProjects/SD_Project/src/fr/enssat/BoulderDash/controllers/RockfordUpdateController.java</file>
+            <file>file:/Users/nelsonalmeida/NetBeansProjects/SD_Project/src/fr/enssat/BoulderDash/models/LevelModel.java</file>
+            <file>file:/Users/nelsonalmeida/NetBeansProjects/SD_Project/src/fr/enssat/BoulderDash/models/RockfordModel.java</file>
+            <file>file:/Users/nelsonalmeida/NetBeansProjects/SD_Project/src/fr/enssat/BoulderDash/controllers/GameKeyController.java</file>
         </group>
     </open-files>
 </project-private>
