@@ -174,14 +174,6 @@ public class Login extends javax.swing.JFrame {
                     
                     this.setVisible(false);
                     
-                    /*
-                     Lobby formLobby = new Lobby(username,session);
-                    formLobby.connection = this.connection;
-                    formLobby.setVisible(true);
-                    formLobby.formLogin = this;
-                    this.setVisible(false);
-                    */
-                    
                 }
             } catch (RemoteException ex) {
                 Logger.getLogger(Login.class.getName()).log(Level.SEVERE, null, ex);

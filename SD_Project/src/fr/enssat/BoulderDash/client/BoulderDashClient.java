@@ -22,8 +22,9 @@ public class BoulderDashClient extends javax.swing.JFrame {
     /**
      * Creates new form BoulderDashConnectionClient
      */
-    public BoulderDashClient() {
+    public BoulderDashClient(String args[]) {
         initComponents();
+        this.ServiceHostname.setText(args[0]);
     }
 
     /**
@@ -202,7 +203,7 @@ public class BoulderDashClient extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new BoulderDashClient().setVisible(true);
+                new BoulderDashClient(args).setVisible(true);
             }
         });
     }

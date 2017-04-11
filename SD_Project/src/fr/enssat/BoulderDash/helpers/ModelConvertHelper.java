@@ -12,6 +12,8 @@ import fr.enssat.BoulderDash.models.DiamondModel;
 import fr.enssat.BoulderDash.models.DirtModel;
 import fr.enssat.BoulderDash.models.MagicWallModel;
 import fr.enssat.BoulderDash.models.SteelWallModel;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  * ModelConvertHelper
@@ -39,6 +41,8 @@ public class ModelConvertHelper {
     public DisplayableElementModel toModel(String spriteName, boolean isConvertible) throws UnknownModelException {
         DisplayableElementModel element;
 
+        //Logger.getLogger(ModelConvertHelper.class.getName()).log(Level.INFO, "spriteName = " + spriteName);
+            
         // Instanciates the sprite element matching the given sprite name
         switch (spriteName) {
             case "black":
@@ -85,6 +89,7 @@ public class ModelConvertHelper {
             case "Rockford0":
             case "rockford1":
             case "Rockford1":
+                
                 element = new RockfordModel(spriteName);
                 break;
 
