@@ -4,19 +4,6 @@ import java.net.InetAddress;
 import java.rmi.registry.LocateRegistry;
 import java.rmi.registry.Registry;
 
-/**
- * <p>
- * Title: Projecto SD</p>
- * <p>
- * Description: Projecto apoio aulas SD</p>
- * <p>
- * Copyright: Copyright (c) 2009</p>
- * <p>
- * Company: UFP </p>
- *
- * @author Rui Moreira
- * @version 1.0
- */
 public class BoulderDashServer {
 
     public static String serviceName = "rmi://localhost:1099/BoulderDashService";
@@ -30,7 +17,7 @@ public class BoulderDashServer {
             }
             // Get referencefor Registry
             InetAddress inetAddr = InetAddress.getLocalHost();
-            //String serviceName = "rmi://localhost:1099/HelloWorldService";
+            
             String hostName = inetAddr.getHostName();
             String hostAddress = inetAddr.getHostAddress();
 
@@ -38,7 +25,7 @@ public class BoulderDashServer {
 
             System.out.println("BoulderDashServer - Constructor(): Local host is " + hostName + " at IP address " + hostAddress);
             System.out.println("BoulderDashServer - Constructor(): get registry on " + hostAddress + " - default port 1099");
-            //Registry registry = LocateRegistry.getRegistry();
+            
             Registry registry = LocateRegistry.getRegistry(inetAddr.getHostAddress(), 1099);
             if (registry != null) {
                 String[] srvList = registry.list();
@@ -47,10 +34,9 @@ public class BoulderDashServer {
                     System.out.println("BoulderDashServer - Constructor(): service svrLis[" + i + "] = " + srvList[i]);
                 }
                 System.out.println("BoulderDashServer - Constructor(): try register service @ " + serviceName + "...");
-                BoulderDashFactoryRI bdfRI = (BoulderDashFactoryRI) new BoulderDashFactoryImpl();
+                BoulderDashServerRI bdsRI = (BoulderDashServerRI) new BoulderDashServerImpl();
 
-                //Naming.bind(serviceName, hwRI);
-                registry.rebind(BoulderDashServer.serviceName, bdfRI);
+                registry.rebind(BoulderDashServer.serviceName, bdsRI);
                 System.out.println("BoulderDashServer - Constructor(): service bound and running!");
             } else {
                 //System.out.println("HelloWorldServer - Constructor(): create registry on port 1099");

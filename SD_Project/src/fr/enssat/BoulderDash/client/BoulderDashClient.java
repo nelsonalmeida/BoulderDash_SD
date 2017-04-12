@@ -1,23 +1,21 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package fr.enssat.BoulderDash.client;
 
-import fr.enssat.BoulderDash.server.BoulderDashFactoryRI;
+import fr.enssat.BoulderDash.server.BoulderDashServerRI;
 import java.rmi.NotBoundException;
 import java.rmi.RemoteException;
 import java.rmi.registry.LocateRegistry;
 import java.rmi.registry.Registry;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.JTextField;
 
-/**
- *
- * @author danie
- */
+
 public class BoulderDashClient extends javax.swing.JFrame {
+    
+    protected BoulderDashServerRI bdsRI;
+    
+    //Colocada por mim
+    //protected BoulderDashClientImpl bdci;
 
     /**
      * Creates new form BoulderDashConnectionClient
@@ -126,20 +124,18 @@ public class BoulderDashClient extends javax.swing.JFrame {
             String serviceHostname = "localhost"; //May be an IP or hostname
             int servicePort = 1099; //Default port is 1099
             String serviceName = "rmi://localhost:1099/BoulderDashService";
-            
-            
-                registryHostname = ServiceHostname.getText();
-                serviceHostname = ServiceHostname.getText();
-                servicePort = Integer.parseInt(Port.getText());
-                serviceName = "rmi://" + serviceHostname + ":1099/BoulderDashService";
-                
+
+            registryHostname = ServiceHostname.getText();
+            serviceHostname = ServiceHostname.getText();
+            servicePort = Integer.parseInt(Port.getText());
+            serviceName = "rmi://" + serviceHostname + ":1099/BoulderDashService";
 
             // Create and install a security manager
             if (System.getSecurityManager() == null) {
                 System.out.println("BoulderDashServer - Constructor(): set security manager");
                 System.setSecurityManager(new SecurityManager());
             }
-            
+
             //Get proxy to Registry service
             Registry registry = LocateRegistry.getRegistry(registryHostname, registryPort);
             if (registry == null) {
@@ -150,20 +146,17 @@ public class BoulderDashClient extends javax.swing.JFrame {
                 for (int i = 0; i < rmiServersList.length; i++) {
                     System.out.println("BoulderDashClient - Constructor(): rmiServersList[" + i + "] = " + rmiServersList[i]);
                 }
-                
-                
+
                 System.out.println("BoulderDashClient - Constructor(): going to lookup service " + serviceName + "...");
-                
+
                 //Get proxy to BoulderDash service
-                 bdfRI = (BoulderDashFactoryRI) registry.lookup(serviceName);
-                //HelloWorldRI hwRI = (HelloWorldRI)Naming.lookup(serviceName);
-
+                bdsRI = (BoulderDashServerRI) registry.lookup(serviceName);
                 
-                Login loginForm = new Login();
-                loginForm.conexao = this;
-                loginForm.setVisible(true);
-                this.setVisible(false);
+                //ADICIONADO POR MIM PARA TENTAR POR O OBSERVER
+                this.bdsRI.attach((BoulderDashClientRI) this);
 
+                //bdci = new BoulderDashClientImpl(bdsRI);
+                new BoulderDashClientImpl(bdsRI);
             }
         } catch (RemoteException ex) {
             Logger.getLogger(BoulderDashClient.class.getName()).log(Level.SEVERE, null, ex);
@@ -207,8 +200,23 @@ public class BoulderDashClient extends javax.swing.JFrame {
             }
         });
     }
-    
-    protected BoulderDashFactoryRI bdfRI;
+
+    public JTextField getServiceHostname() {
+        return ServiceHostname;
+    }
+
+    public void setServiceHostname(JTextField ServiceHostname) {
+        this.ServiceHostname = ServiceHostname;
+    }
+
+    public JTextField getPort() {
+        return Port;
+    }
+
+    public void setPort(JTextField Port) {
+        this.Port = Port;
+    }
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTextField Port;
     private javax.swing.JTextField ServiceHostname;
