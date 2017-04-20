@@ -3,47 +3,39 @@ package fr.enssat.BoulderDash.server;
 import java.io.Serializable;
 
 public class State implements Serializable{
-    private String id;
-    private String info;
+    //private String gameName;
+    private String playerName;
+    private int key;
 
-    public State(String id, String msg) {
-        this.id = id;
-        this.info = msg;
+    public State(String playerName, int key) {
+        this.playerName = playerName;
+        this.key = key;
     }
 
     /**
      * @return the id
      */
     public String getId() {
-        return id;
+        return playerName;
     }
 
     /**
-     * @param id the id to set
+     * @param playerName the id to set
      */
-    public void setId(String id) {
-        this.id = id;
+    public void setId(String playerName) {
+        this.playerName= playerName;
     }
 
-    /**
-     * @return the info
-     */
-    public String getInfo() {
-        return info;
+    public int getKey() {
+        return key;
     }
 
-    /**
-     * @param info the info to set
-     */
-    public void setInfo(String info) {
-        this.info = info;
+    public void setKey(int key) {
+        this.key = key;
     }
 
     @Override
     public String toString() {
-        return "State{" + "id=" + id + ", info=" + info + '}';
+        return "State{" + "id=" + playerName + ", key=" + key + '}';
     }
-    
 }
-
-

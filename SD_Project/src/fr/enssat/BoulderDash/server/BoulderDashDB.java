@@ -1,18 +1,20 @@
 package fr.enssat.BoulderDash.server;
 
-import java.io.Serializable;
 import java.util.ArrayList;
 
-public class DB implements Serializable {
+public class BoulderDashDB {
 
-    protected ArrayList<User> users;
-    protected ArrayList<CurrentGames> games;
+    protected ArrayList<User> users = new ArrayList();
+    protected ArrayList<CurrentGames> games = new ArrayList();
 
-    public DB() {
+    public BoulderDashDB() {
         //Ao instanciar a base de dados cria logo 2 utilizadores estaticos
-        users.add(new User("daniel", "mendes"));
-        users.add(new User("nelson", "almeida"));
-
+        
+        addUser("nelson", "almeida");
+        addUser("daniel" , "mendes");
+        
+        //users.add(new User("daniel", "mendes"));
+        //users.add(new User("nelson", "almeida"));
     }
 
     public boolean addUser(String user, String pass) {
@@ -25,7 +27,7 @@ public class DB implements Serializable {
 
     public boolean exists(String user, String pass) {
         for (User usr : this.users) {
-            if (usr.getUsername().compareTo(user) == 0 && usr.getPassword().compareTo(pass) == 0) {
+            if (usr.getUname().compareTo(user) == 0 && usr.getPword().compareTo(pass) == 0) {
                 return true;
             }
         }
@@ -44,6 +46,16 @@ public class DB implements Serializable {
             }
         }
         return currentGames;
+    }
+    
+     public CurrentGames getGame(String name){
+        for(int i=0;i<games.size();i++){
+            CurrentGames game = games.get(i);
+            if(game.getName().equals(name)){
+                return game;
+            }
+        }
+        return null;
     }
 
 }

@@ -1,5 +1,7 @@
 package fr.enssat.BoulderDash.views;
 
+import fr.enssat.BoulderDash.client.BoulderDashObserverImpl;
+import fr.enssat.BoulderDash.client.BoulderDashObserverRI;
 import fr.enssat.BoulderDash.views.GroundView;
 import fr.enssat.BoulderDash.controllers.GameController;
 import fr.enssat.BoulderDash.controllers.GameKeyController;
@@ -19,6 +21,8 @@ import java.awt.*;
  */
 public class GameGroundView extends GroundView {
     private GameController gameController;
+    
+    private BoulderDashObserverRI obs;
 
     /**
      * Class constructor
@@ -26,12 +30,13 @@ public class GameGroundView extends GroundView {
      * @param  gameController  Game controller
      * @param  levelModel      Level model
      */
-    public GameGroundView(GameController gameController, LevelModel levelModel) {
+    public GameGroundView(GameController gameController, LevelModel levelModel, BoulderDashObserverRI obs) {
         super(levelModel);
 
         this.gameController = gameController;
+        this.obs =obs;
 
-        this.addKeyListener(new GameKeyController(this.levelModel, this.gameController.getAudioLoadHelper()));
+        this.addKeyListener(new GameKeyController(this.levelModel, this.gameController.getAudioLoadHelper(),obs));
 
         this.setBorder(BorderFactory.createLineBorder(Color.black));
         this.setFocusable(true);

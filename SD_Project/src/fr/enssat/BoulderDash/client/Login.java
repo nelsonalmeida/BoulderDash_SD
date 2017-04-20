@@ -1,19 +1,26 @@
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
 package fr.enssat.BoulderDash.client;
 
+import fr.enssat.BoulderDash.server.BoulderDashSessionRI;
 import java.rmi.RemoteException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
+/**
+ *
+ * @author daniel
+ */
 public class Login extends javax.swing.JFrame {
-
-    protected BoulderDashClientImpl bdc;
-
+    protected BoulderDashClient bdc;
     /**
      * Creates new form Login
-     *
      * @param bdc
      */
-    public Login(BoulderDashClientImpl bdc) {
+    public Login(BoulderDashClient bdc) {
         this.bdc = bdc;
         initComponents();
     }
@@ -142,70 +149,115 @@ public class Login extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButtonLoginActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonLoginActionPerformed
-
-        if (jTextFieldUsername.getText().equals("") || jTextFieldPassword.getText().equals("")) {
+        
+    
+        if(jTextFieldUsername.getText().equals("") || jTextFieldPassword.getText().equals("")){
             System.err.println("Missing Username or Password");
             System.exit(1);
-        } else {
+        }else{
             try {
                 String username = jTextFieldUsername.getText();
                 String password = jTextFieldPassword.getText();
-
-                //Vai ao servidor verificar o login
-                boolean login = this.bdc.bdsRI.login(bdc, username, password);
-
-                if (login == false) {
-                    System.out.println("Login fail after accessing server! - Maybe wrong Username or Password!");
+                
+                BoulderDashSessionRI dlsRI = (BoulderDashSessionRI) this.bdc.bdfRI.login(username,password);
+                
+                if (dlsRI==null){
+                    System.out.println("BoulderDashClient - Constructor(): dlsRI is null!!!");
                     System.exit(0);
-                } else {
-                    //Se username e password correta então abre a janela do welcome
-                    Welcome welcomeWindow = new Welcome(username, bdc);
-                    //ESTA PROXIMA LINHA NÃO SEI SE É PRECISO. SE NAO FOR PRECISO O WELCOME DO LADO DO BoulderDashClientImpl NÃO ESTA LA A FAZER NADA
-                    this.bdc.setGui(welcomeWindow);
+                }else{
+                    
+                    Welcome welcomeWindow = new Welcome(username,dlsRI,bdc);
+                   // welcomeWindow.conexao = this.conexao;
                     welcomeWindow.setVisible(true);
+                    
                     this.setVisible(false);
+                    
                 }
             } catch (RemoteException ex) {
                 Logger.getLogger(Login.class.getName()).log(Level.SEVERE, null, ex);
             }
-        }
-
+        } 
+       
     }//GEN-LAST:event_jButtonLoginActionPerformed
 
     private void jButtonRegisterActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonRegisterActionPerformed
-
-        if (jTextFieldUsername.getText().equals("") || jTextFieldPassword.getText().equals("")) {
+    
+        if(jTextFieldUsername.getText().equals("") || jTextFieldPassword.getText().equals("")){
             System.err.println("Missing Username or Password");
             System.exit(1);
-        } else {
+        }else{
             try {
+                /** Le o que escrevemos nos campos */
                 String username = jTextFieldUsername.getText();
                 String password = jTextFieldPassword.getText();
-
-                //Vai ao servidor fazer o registo
-                boolean registration = this.bdc.bdsRI.register(bdc, username, password);
-
-                if (registration == false) {
-                    System.out.println("Registration fail after accessing server!");
+                /** vai ao factory e chama a funcao register **/
+                boolean registo =  bdc.bdfRI.register(username,password);
+                /** se der mal o registo sai fora**/
+                if(registo==false){
+                    System.out.println("BoulderDashClient - Constructor(): User already exists !!!");
                     System.exit(0);
-                } else {
-                    Welcome welcomeForm = new Welcome(username, bdc);
-                    //ESTA PROXIMA LINHA NÃO SEI SE É PRECISO. SE NAO FOR PRECISO O WELCOME DO LADO DO BoulderDashClientImpl NÃO ESTA LA A FAZER NADA
-                    this.bdc.setGui(welcomeForm);
-                    welcomeForm.setVisible(true);
-                    this.setVisible(false);
-
+                }else{
+                    /** se der bem o registo, faz login e se estiver correto vai para o welcome **/
+                    BoulderDashSessionRI dlsRI = (BoulderDashSessionRI) this.bdc.bdfRI.login(username,password);
+                    if (dlsRI==null){
+                        System.out.println("BoulderDashClient - Constructor(): dlsRI is null!!!");
+                        System.exit(0);
+                    }else{
+                        Welcome welcomeForm = new Welcome(username,dlsRI,bdc);
+                        //welcomeForm.conexao = this.conexao;
+                        welcomeForm.setVisible(true);
+                        //formLobby.formLogin = this;
+                        this.setVisible(false);
+                        
+                    } 
                 }
             } catch (RemoteException ex) {
                 Logger.getLogger(Login.class.getName()).log(Level.SEVERE, null, ex);
             }
-        }
+        } 
     }//GEN-LAST:event_jButtonRegisterActionPerformed
 
     private void jTextFieldUsernameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextFieldUsernameActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jTextFieldUsernameActionPerformed
 
+    
+    /**
+     * @param args the command line arguments
+     */
+    /*public static void main(String args[]) {
+  
+        try {
+            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
+                if ("Nimbus".equals(info.getName())) {
+                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
+                    break;
+                }
+            }
+        } catch (ClassNotFoundException ex) {
+            java.util.logging.Logger.getLogger(Login.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        } catch (InstantiationException ex) {
+            java.util.logging.Logger.getLogger(Login.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        } catch (IllegalAccessException ex) {
+            java.util.logging.Logger.getLogger(Login.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
+            java.util.logging.Logger.getLogger(Login.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        }
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+
+        
+       java.awt.EventQueue.invokeLater(new Runnable() {
+            @Override
+            public void run() {
+                new Login().setVisible(true);
+            }
+        });
+    }
+    */
+    
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButtonLogin;

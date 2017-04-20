@@ -1,5 +1,7 @@
 package fr.enssat.BoulderDash.controllers;
 
+import fr.enssat.BoulderDash.client.BoulderDashObserverRI;
+import fr.enssat.BoulderDash.client.Welcome;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
@@ -8,6 +10,7 @@ import fr.enssat.BoulderDash.models.LevelModel;
 import fr.enssat.BoulderDash.views.MenuView;
 import fr.enssat.BoulderDash.controllers.LevelEditorController;
 import fr.enssat.BoulderDash.controllers.GameController;
+import fr.enssat.BoulderDash.server.CurrentGames;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -17,7 +20,7 @@ import java.util.logging.Logger;
  * @author Colin Leverger <me@colinleverger.fr>
  *
  */
-public class NavigationBetweenViewController implements ActionListener {
+public class NavigationBetweenViewController {
 
     private LevelEditorController levelEditorController;
     private MenuView menuView;
@@ -25,25 +28,42 @@ public class NavigationBetweenViewController implements ActionListener {
     private LevelModel levelModelForGame, levelModelForEditor;
     private GameController gameController;
     private String pickedLevelIdentifier;
+    public CurrentGames currentgames;
+    public String level;
+    
+    private BoulderDashObserverRI obs;
 
     /**
      * Class constructor
      */
-    public NavigationBetweenViewController() {
+    public NavigationBetweenViewController(String level, BoulderDashObserverRI obs) {
+        
+        this.level = level;
+        this.obs = obs;
+    
         this.audioLoadHelper = new AudioLoadHelper();
 
         // Play game music
         this.getAudioLoadHelper().startMusic("game");
+        
+        pickedLevelIdentifier = level;
 
-        // Creation of the first view
-        this.menuView = new MenuView(this);
+        this.levelModelForGame = new LevelModel(pickedLevelIdentifier, audioLoadHelper);
+        this.gameController = new GameController(levelModelForGame, audioLoadHelper, this, obs);
+        if (levelEditorController != null) {
+            this.levelEditorController.getLevelEditorView().setVisible(false);
+        }
+
+        this.gameController.getGameView().setVisible(true);
+        this.gameController.getGameView().getGameFieldView().grabFocus();
+
     }
 
     /**
      * Action performed event handler
      *
      * @param event Action event
-     */
+     
     @Override
     public void actionPerformed(ActionEvent event) {
         switch (event.getActionCommand()) {
@@ -85,7 +105,7 @@ public class NavigationBetweenViewController implements ActionListener {
 
         this.menuView.setVisible(false);
     }
-
+*/
     /**
      * Get the audio load helper
      *
@@ -108,6 +128,7 @@ public class NavigationBetweenViewController implements ActionListener {
      * Set the first view
      *
      * @param menuView
+     * @return 
      */
     public MenuView setMenuView() {
         this.menuView = new MenuView(this);

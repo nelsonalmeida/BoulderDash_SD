@@ -1,5 +1,7 @@
 package fr.enssat.BoulderDash.views;
 
+import fr.enssat.BoulderDash.client.BoulderDashObserverImpl;
+import fr.enssat.BoulderDash.client.BoulderDashObserverRI;
 import javax.swing.*;
 
 import java.awt.*;
@@ -26,6 +28,9 @@ public class GameView extends JFrame implements Observer {
 	private JPanel informationPanel;
 	private GameController gameController;
 	private LevelModel levelModel;
+        
+        private BoulderDashObserverRI obs;
+        
 
     /**
      * Class constructor
@@ -33,9 +38,11 @@ public class GameView extends JFrame implements Observer {
      * @param  gameController  Game controller
      * @param  levelModel      Level model
      */
-	public GameView(GameController gameController, LevelModel levelModel) {
+	public GameView(GameController gameController, LevelModel levelModel, BoulderDashObserverRI obs) {
 		this.gameController = gameController;
 		this.levelModel = levelModel;
+                
+                this.obs = obs;
 		
         this.initializeView();
         this.createLayout();
@@ -65,7 +72,7 @@ public class GameView extends JFrame implements Observer {
      * Creates the view layout
      */
     private void createLayout() {
-        this.gameGroundView = new GameGroundView(this.gameController, this.levelModel);
+        this.gameGroundView = new GameGroundView(this.gameController, this.levelModel, obs);
         this.actionPanel = new JPanel();
         this.informationPanel = new InformationPanel(this.levelModel);
         this.informationPanel.setBackground(Color.white);

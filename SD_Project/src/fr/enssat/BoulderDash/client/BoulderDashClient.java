@@ -1,6 +1,12 @@
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
 package fr.enssat.BoulderDash.client;
 
-import fr.enssat.BoulderDash.server.BoulderDashServerRI;
+import fr.enssat.BoulderDash.server.BoulderDashFactoryRI;
+import fr.enssat.BoulderDash.server.BoulderDashSubjectRI;
 import java.rmi.NotBoundException;
 import java.rmi.RemoteException;
 import java.rmi.registry.LocateRegistry;
@@ -9,14 +15,19 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JTextField;
 
-
+/**
+ *
+ * @author danie
+ */
 public class BoulderDashClient extends javax.swing.JFrame {
     
-    protected BoulderDashServerRI bdsRI;
+    protected BoulderDashFactoryRI bdfRI;
     
-    //Colocada por mim
-    //protected BoulderDashClientImpl bdci;
-
+    public Login login;
+    
+    //Observer
+    public BoulderDashObserverRI obs;
+    
     /**
      * Creates new form BoulderDashConnectionClient
      */
@@ -52,8 +63,6 @@ public class BoulderDashClient extends javax.swing.JFrame {
         jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/fr/enssat/BoulderDash/images/arcade-font-writer (17).png"))); // NOI18N
 
         jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/fr/enssat/BoulderDash/images/arcade-font-writer (18).png"))); // NOI18N
-
-        ServiceHostname.setText("192.168.1.243");
 
         jLabel4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/fr/enssat/BoulderDash/images/arcade-font-writer (19).png"))); // NOI18N
 
@@ -124,18 +133,20 @@ public class BoulderDashClient extends javax.swing.JFrame {
             String serviceHostname = "localhost"; //May be an IP or hostname
             int servicePort = 1099; //Default port is 1099
             String serviceName = "rmi://localhost:1099/BoulderDashService";
-
-            registryHostname = ServiceHostname.getText();
-            serviceHostname = ServiceHostname.getText();
-            servicePort = Integer.parseInt(Port.getText());
-            serviceName = "rmi://" + serviceHostname + ":1099/BoulderDashService";
+            
+            
+                registryHostname = ServiceHostname.getText();
+                serviceHostname = ServiceHostname.getText();
+                servicePort = Integer.parseInt(Port.getText());
+                serviceName = "rmi://" + serviceHostname + ":1099/BoulderDashService";
+                
 
             // Create and install a security manager
             if (System.getSecurityManager() == null) {
                 System.out.println("BoulderDashServer - Constructor(): set security manager");
                 System.setSecurityManager(new SecurityManager());
             }
-
+            
             //Get proxy to Registry service
             Registry registry = LocateRegistry.getRegistry(registryHostname, registryPort);
             if (registry == null) {
@@ -146,17 +157,15 @@ public class BoulderDashClient extends javax.swing.JFrame {
                 for (int i = 0; i < rmiServersList.length; i++) {
                     System.out.println("BoulderDashClient - Constructor(): rmiServersList[" + i + "] = " + rmiServersList[i]);
                 }
-
-                System.out.println("BoulderDashClient - Constructor(): going to lookup service " + serviceName + "...");
-
-                //Get proxy to BoulderDash service
-                bdsRI = (BoulderDashServerRI) registry.lookup(serviceName);
                 
-                //ADICIONADO POR MIM PARA TENTAR POR O OBSERVER
-                this.bdsRI.attach((BoulderDashClientRI) this);
-
-                //bdci = new BoulderDashClientImpl(bdsRI);
-                new BoulderDashClientImpl(bdsRI);
+                
+                System.out.println("BoulderDashClient - Constructor(): going to lookup service " + serviceName + "...");
+                
+                //Get proxy to BoulderDash service
+                 bdfRI = (BoulderDashFactoryRI) registry.lookup(serviceName);
+                 this.login = new Login(this);
+                 login.setVisible(true);
+                 this.setVisible(false);
             }
         } catch (RemoteException ex) {
             Logger.getLogger(BoulderDashClient.class.getName()).log(Level.SEVERE, null, ex);
@@ -164,7 +173,7 @@ public class BoulderDashClient extends javax.swing.JFrame {
             Logger.getLogger(BoulderDashClient.class.getName()).log(Level.SEVERE, null, ex);
         }
     }//GEN-LAST:event_jButton1ActionPerformed
-
+    //METER DEPOIS APARECER IP NO CONNECT
     /**
      * @param args the command line arguments
      */
@@ -200,7 +209,7 @@ public class BoulderDashClient extends javax.swing.JFrame {
             }
         });
     }
-
+    
     public JTextField getServiceHostname() {
         return ServiceHostname;
     }
@@ -216,7 +225,7 @@ public class BoulderDashClient extends javax.swing.JFrame {
     public void setPort(JTextField Port) {
         this.Port = Port;
     }
-
+    
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTextField Port;
     private javax.swing.JTextField ServiceHostname;

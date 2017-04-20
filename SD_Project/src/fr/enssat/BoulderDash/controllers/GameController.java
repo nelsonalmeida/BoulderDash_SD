@@ -1,5 +1,7 @@
 package fr.enssat.BoulderDash.controllers;
 
+import fr.enssat.BoulderDash.client.BoulderDashObserverImpl;
+import fr.enssat.BoulderDash.client.BoulderDashObserverRI;
 import fr.enssat.BoulderDash.models.LevelModel;
 import fr.enssat.BoulderDash.helpers.AudioLoadHelper;
 import fr.enssat.BoulderDash.controllers.NavigationBetweenViewController;
@@ -25,6 +27,8 @@ public class GameController implements ActionListener {
     private MenuView menuView;
     private GameView gameView;
     private NavigationBetweenViewController navigationBetweenViewController;
+    
+    private BoulderDashObserverRI obs;
 
     /**
      * Class constructor
@@ -32,15 +36,16 @@ public class GameController implements ActionListener {
      * @param levelModel Level model
      * @param navigationBetweenViewController
      */
-    public GameController(LevelModel levelModel, AudioLoadHelper audioLoadHelper, NavigationBetweenViewController navigationBetweenViewController) {
+    public GameController(LevelModel levelModel, AudioLoadHelper audioLoadHelper, NavigationBetweenViewController navigationBetweenViewController, BoulderDashObserverRI obs) {
 
         this.firstClickOnPause = true;
+        this.obs = obs;
 
         this.navigationBetweenViewController = navigationBetweenViewController;
 
         this.levelModel = levelModel;
         this.audioLoadHelper = audioLoadHelper;
-        this.gameView = new GameView(this, levelModel);
+        this.gameView = new GameView(this, levelModel,obs);
         this.menuView = navigationBetweenViewController.getMenuView();
 
         this.getAudioLoadHelper().stopMusic();
@@ -87,7 +92,7 @@ public class GameController implements ActionListener {
 
         if (source.equals("restart")) {
             this.levelModel = new LevelModel(this.navigationBetweenViewController.getPickedLevelIdentifier(), audioLoadHelper);
-            this.gameView = new GameView(this, levelModel);
+            this.gameView = new GameView(this, levelModel,obs);
             this.gameView.setVisible(true);
         }
     }
